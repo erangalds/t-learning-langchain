@@ -1,0 +1,7 @@
+.env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+01-langchain-primer/__pycache__
+common_utils/__pycache__
