@@ -75,5 +75,5 @@ model = ChatOpenAI(model=   "gpt-4o-mini")
 # `prompt` and `completion` are the results of using template and model once
 
 
-response = model.invoke(prompt)
+response = model.invoke(generated_prompt)
 print(response.content)
