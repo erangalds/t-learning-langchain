@@ -6,3 +6,4 @@ __pycache__
 01-langchain-primer/__pycache__
 common_utils/__pycache__
 chroma-db
+Chinook.db
