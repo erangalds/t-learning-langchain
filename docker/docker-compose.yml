@@ -1,0 +1,18 @@
+version: '3.8' # Specifies the docker-compose version
+
+services:
+  pgvector:
+    image: pgvector/pgvector:pg17 # The image to use
+    container_name: pgvector-container # Sets the container name
+    environment:
+      POSTGRES_USER: langchain # Sets the PostgreSQL user
+      POSTGRES_PASSWORD: langchain # Sets the PostgreSQL password
+      POSTGRES_DB: langchain # Sets the default database name
+    ports:
+      - "6024:5432" # Maps port 6024 on your host to port 5432 in the container
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data # Persists database data using a named volume
+    restart: unless-stopped # Optional: restarts the container unless manually stopped
+
+volumes:
+  pgvector_data: # Defines the named volume used above
