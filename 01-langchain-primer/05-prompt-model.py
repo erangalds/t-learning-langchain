@@ -63,17 +63,21 @@ generated_prompt = template.invoke(
     }
 )
 # Print the generated prompt
-print("Generated Prompt:")
+print("\n\nGenerated Prompt:\n")
 print(generated_prompt)
-
+print('\n\n')
 # create a model instance
 # The ChatOpenAI class is used to create a model instance
 # The model instance is used to generate the response
-model = ChatOpenAI(model=   "gpt-4o-mini")
+model = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0,
+)
 # model = ChatOpenAI(model="gpt-3.5o")
 
 # `prompt` and `completion` are the results of using template and model once
 
 
 response = model.invoke(generated_prompt)
+print('\n\nAI Response:\n')
 print(response.content)

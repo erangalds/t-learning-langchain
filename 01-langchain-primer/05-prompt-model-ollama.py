@@ -46,7 +46,7 @@ generated_prompt = template.invoke(
     }
 )
 # Print the generated prompt
-print("Generated Prompt:")
+print("\n\nGenerated Prompt:\n")
 print(generated_prompt)
 
 # create a model instance

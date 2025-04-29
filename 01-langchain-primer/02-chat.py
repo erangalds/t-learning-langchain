@@ -1,6 +1,5 @@
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage
-from dotenv import load_dotenv # Import load_dotenv
 import os
 from dotenv import load_dotenv # Import load_dotenv
 
@@ -39,6 +38,6 @@ prompt = [HumanMessage("What is the capital of France?")]
 response = model.invoke(prompt)
 # Print the prompt and response
 print(f'Prompt:\n{prompt}')
-print(f'AI Response:\n{response}')
-print(f'AI Response Content Only:\n{response.content}')
+print(f'\n\nAI Response:\n{response}')
+print(f'\n\nAI Response Content Only:\n{response.content}')
 

@@ -2,13 +2,7 @@ from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 import os 
 from dotenv import load_dotenv # Import load_dotenv
-load_dotenv() # Load environment variables from .env file
 
-# Set the OpenAI API key from the environment variable
-openai_api_key = os.getenv("OPENAI_API_KEY")
-# Check if the API key is set
-if openai_api_key is None:
-    raise ValueError("OPENAI_API_KEY environment variable not set")
 
 # `ChatPromptTemplate` is a class that allows you to create a prompt template for chat models.
 # It is a subclass of `PromptTemplate` and is used to create prompts for chat models like GPT-3.5 and GPT-4.

@@ -21,6 +21,7 @@ def authenticate_with_openai():
 authenticate_with_openai()# This function sets the OpenAI API key from an environment variable
 
 # the building blocks
+# Initializing the AI Model. 
 model = ChatOpenAI(
     model="gpt-4o-mini", 
     temperature=0
