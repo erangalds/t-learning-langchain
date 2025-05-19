@@ -99,13 +99,13 @@ Here's a step-by-step explanation:
 
 6. Example Usage:
     
-```python
-initial_state = {"foo": "hello"}
-result = graph.invoke(initial_state)
-print(
-    f"Result: {result}"
-)  # Should transform foo->bar, append "baz", then transform bar->foo
-```
+    ```python
+    initial_state = {"foo": "hello"}
+    result = graph.invoke(initial_state)
+    print(
+        f"Result: {result}"
+    )  # Should transform foo->bar, append "baz", then transform bar->foo
+    ```
 
     + The parent graph is invoked with an initial state {"foo": "hello"}.
     + Flow:
