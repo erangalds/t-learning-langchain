@@ -120,7 +120,7 @@ Here's a step-by-step explanation:
 
 ## Key Takeaway & Comparison:
 
-    + Function-Based Interface (This Script): You use this when the parent and subgraph have different state schemas or when you need more complex logic to prepare data for the subgraph or process its results. A regular Python function in the parent graph explicitly calls subgraph.invoke() and handles the data transformations.
-    + Direct Interface (like in 02-subgraph-direct-interface-architecture-pattern.py): You use this when the parent and subgraph share some state keys. You can add the compiled subgraph directly as a node to the parent graph (parent_builder.add_node("subgraph_name", subgraph)). LangGraph automatically passes the shared parts of the state to the subgraph and merges its output back.
++ Function-Based Interface (This Script): You use this when the parent and subgraph have different state schemas or when you need more complex logic to prepare data for the subgraph or process its results. A regular Python function in the parent graph explicitly calls subgraph.invoke() and handles the data transformations.
++ Direct Interface (like in 02-subgraph-direct-interface-architecture-pattern.py): You use this when the parent and subgraph share some state keys. You can add the compiled subgraph directly as a node to the parent graph (parent_builder.add_node("subgraph_name", subgraph)). LangGraph automatically passes the shared parts of the state to the subgraph and merges its output back.
 
 This script effectively demonstrates the flexibility of LangGraph in composing graphs, allowing for clear separation of concerns and adaptation between different components (graphs) even when their immediate interfaces (state schemas) don't match directly. The node function acts as an adapter.
