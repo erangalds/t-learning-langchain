@@ -11,34 +11,34 @@ Here's a step-by-step explanation:
 
 2. Define State Schemas:
 
-    + `State(TypedDict)`:
+    + `State(TypedDict)`
 
-```python
-class State(TypedDict):
-    foo: str
-```
+        ```python
+        class State(TypedDict):
+            foo: str
+        ```
 
-    This defines the *state* for the *parent graph*. It has a single *key* `foo` of type string.
+        This defines the *state* for the *parent graph*. It has a single *key* `foo` of type string.
 
-    + `SubgraphState(TypedDict)`:
+    + `SubgraphState(TypedDict)`
 
-```python
-class SubgraphState(TypedDict):
-    # none of these keys are shared with the parent graph state
-    bar: str
-    baz: str
-```
+        ```python
+        class SubgraphState(TypedDict):
+            # none of these keys are shared with the parent graph state
+            bar: str
+            baz: str
+        ```
 
-    This defines the *state* for the *subgraph*. It has two *keys*, `bar` and `baz`, both strings. Crucially, as the comment notes, these *keys* are not directly shared with the parent graph's *state schema*. The `baz` *key* is defined but not actually used as an input to the `subgraph_node` in this specific example; the string "baz" is hardcoded within it.
+        This defines the *state* for the *subgraph*. It has two *keys*, `bar` and `baz`, both strings. Crucially, as the comment notes, these *keys* are not directly shared with the parent graph's *state schema*. The `baz` *key* is defined but not actually used as an input to the `subgraph_node` in this specific example; the string "baz" is hardcoded within it.
 
 3. Define the Subgraph:
 
     + `subgraph_node(state: SubgraphState)`:
 
-```python
-def subgraph_node(state: SubgraphState):
-    return {"bar": state["bar"] + "baz"}
-```
+        ```python
+        def subgraph_node(state: SubgraphState):
+            return {"bar": state["bar"] + "baz"}
+        ```
 
     This function is the single node within the subgraph.
 
@@ -48,13 +48,13 @@ def subgraph_node(state: SubgraphState):
 
     + Subgraph Construction:
 
-```python
-subgraph_builder = StateGraph(SubgraphState)
-subgraph_builder.add_node("subgraph_node", subgraph_node)
-subgraph_builder.add_edge(START, "subgraph_node")
-# Additional subgraph setup would go here
-subgraph = subgraph_builder.compile()
-```
+        ```python
+        subgraph_builder = StateGraph(SubgraphState)
+        subgraph_builder.add_node("subgraph_node", subgraph_node)
+        subgraph_builder.add_edge(START, "subgraph_node")
+        # Additional subgraph setup would go here
+        subgraph = subgraph_builder.compile()
+        ```
 
     + A StateGraph is initialized with SubgraphState.
     + subgraph_node is added as a node named "subgraph_node".
@@ -65,32 +65,32 @@ subgraph = subgraph_builder.compile()
 
     + node(state: State):
 
-```python
-def node(state: State):
-    # transform the state to the subgraph state
-    response = subgraph.invoke({"bar": state["foo"]})
-    # transform response back to the parent state
-    return {"foo": response["bar"]}
-```
-    This function is the core of this pattern. It acts as a node in the parent graph and serves as the interface to the subgraph.
-        + It takes the parent graph's State (which contains foo) as input.
-        + Transformation to Subgraph State: It calls subgraph.invoke().
-            + Notice how it manually creates the input dictionary for the subgraph: {"bar": state["foo"]}. It maps the parent's foo value to the subgraph's expected bar key.
-        + Transformation from Subgraph Response: The response from subgraph.invoke() will be a SubgraphState dictionary (e.g., {"bar": "hellobaz", "baz": "initial_baz_if_it_were_passed_and_returned"}).
-            + It then manually extracts the relevant data from the subgraph's response (response["bar"]) and maps it back to the parent graph's state structure: {"foo": response["bar"]}.
+        ```python
+        def node(state: State):
+            # transform the state to the subgraph state
+            response = subgraph.invoke({"bar": state["foo"]})
+            # transform response back to the parent state
+            return {"foo": response["bar"]}
+        ```
+        This function is the core of this pattern. It acts as a node in the parent graph and serves as the interface to the subgraph.
+            + It takes the parent graph's State (which contains foo) as input.
+            + Transformation to Subgraph State: It calls subgraph.invoke().
+                + Notice how it manually creates the input dictionary for the subgraph: {"bar": state["foo"]}. It maps the parent's foo value to the subgraph's expected bar key.
+            + Transformation from Subgraph Response: The response from subgraph.invoke() will be a SubgraphState dictionary (e.g., {"bar": "hellobaz", "baz": "initial_baz_if_it_were_passed_and_returned"}).
+                + It then manually extracts the relevant data from the subgraph's response (response["bar"]) and maps it back to the parent graph's state structure: {"foo": response["bar"]}.
 
 5. Define the Parent Graph:
 
     + Parent Graph Construction:
 
-```python
-builder = StateGraph(State)
-# note that we are using `node` function instead of a compiled subgraph
-builder.add_node("node", node)
-builder.add_edge(START, "node")
-# Additional parent graph setup would go here
-graph = builder.compile()
-```
+        ```python
+        builder = StateGraph(State)
+        # note that we are using `node` function instead of a compiled subgraph
+        builder.add_node("node", node)
+        builder.add_edge(START, "node")
+        # Additional parent graph setup would go here
+        graph = builder.compile()
+        ```
 
     + A StateGraph is initialized with the parent State.
     + The node function (defined above) is added as a node named "node". This is different from the "direct interface" pattern where you'd add subgraph directly.
