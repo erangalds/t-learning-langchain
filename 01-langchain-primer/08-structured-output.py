@@ -53,7 +53,9 @@ answer = response.answer
 # Extract the justification from the response
 justification = response.justification
 
+# Print the question, answer, and justification
 print(f'\nQuestion: {prompt}')
+print(f'\n\nResponse: {response}')
 print(f'\n\nAnswer: {answer}')
 print(f'\n\nJustification: {justification}')
 

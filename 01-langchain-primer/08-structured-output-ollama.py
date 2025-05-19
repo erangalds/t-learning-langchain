@@ -43,6 +43,7 @@ answer = response.answer
 justification = response.justification
 
 print(f'\nQuestion: {prompt}')
+print(f'\n\nResponse: {response}')
 print(f'\n\nAnswer: {answer}')
 print(f'\n\nJustification: {justification}')
 

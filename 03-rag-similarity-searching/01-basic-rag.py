@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import TextLoader
 from langchain_ollama import OllamaEmbeddings
-from langchain_core.exceptions import LangChainException, LangChainError
+from langchain_core.exceptions import LangChainException
 from langchain_postgres.vectorstores import PGVector
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_ollama import ChatOllama 
@@ -51,7 +51,7 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
 query = "Who are the key figures in the ancient greek history of philosophy?"
 
 # Fetch relevant documents
-docs = retriever.invoke(query)
+retrieved_docs = retriever.invoke(query)
 
 # Define a Prompt Template
 prompt = ChatPromptTemplate.from_messages([
@@ -83,7 +83,7 @@ response = None
 try:
     response = llm_chain.invoke(
         {
-            "context": docs,
+            "context": retrieved_docs,
             "question": query
         }
     )

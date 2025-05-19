@@ -16,7 +16,10 @@ try:
     if documents:
         # Print the number of documents loaded
         print(f"\nLoaded {len(documents)} documents.")
+        print(f"Type of documents list: {type(documents)}")
+        print(f"Type of individual document: {type(documents[0])}")
         # Print the first document content (or a snippet)
+        print(f"First document :\n---\n{documents[0]}...\n---")
         print(f"\nFirst document content snippet:\n---\n{documents[0].page_content[:200]}...\n---")
         # Print Document metadata for the first document
         print(f"\nFirst document metadata: {documents[0].metadata}")
