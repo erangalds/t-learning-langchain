@@ -40,7 +40,7 @@ Here's a step-by-step explanation:
             return {"bar": state["bar"] + "baz"}
         ```
 
-    This function is the single node within the subgraph.
+        This function is the single node within the subgraph.
 
         + It takes the SubgraphState as input.
         + It concatenates the string "baz" to the value of state["bar"].
