@@ -91,6 +91,8 @@ def generate_sql(state: State) -> State:
     # The final message to the model is a combination of the system message and the user query and the current conversation history
     # Conversation history is stored in the state under the key "messages"
     messages = [generate_prompt, *state["messages"], user_message]
+    # list_temp = [ a, b, c]
+    # list_final = [ A, *list_temp, B] ==> [A, a, b, c, B]
     # The model is invoked with the final list of messages
     res = model_low_temp.invoke(messages)
     # The model returns a message with the SQL query

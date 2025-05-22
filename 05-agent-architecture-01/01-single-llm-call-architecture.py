@@ -87,6 +87,7 @@ input = {"messages": [HumanMessage("hi!, I am eranga.")]}
 # The input data is passed to the graph
 # The `stream` function returns a generator that yields the
 # output data as it is generated
+# for chunk graph.stream(input):
 for i, chunk in enumerate(graph.stream(input)):
     print(f"Iteration {i}:") # Just Printing the iteration number
     # print("Chunk:")
